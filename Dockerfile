@@ -1,16 +1,17 @@
-FROM ubuntu:18.04
-MAINTAINER "Julian Martin" <julian.martin@leaseplan.com>
+FROM ubuntu:20.04
+LABEL maintainer="JuliBCN <julibcn@gmail.com>"
 
-# Install dependencies
-RUN apt-get update
-RUN apt-get -y install apache2
+# Install Dependencies
+ENV TZ=Europe/Dublin
+RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN apt-get update && apt-get -y install apache2
 
-# Install apache and write hello world message
+# Install Apache and copy the SRC directory
 RUN rm -rf /var/www/*
 ADD src /var/www/html
 RUN echo ServerName ${HOSTNAME} >> /etc/apache2/apache2.conf
 
-# Configure apache
+# Configure Apache to run with Docker
 RUN echo '. /etc/apache2/envvars' > /root/run_apache.sh
 RUN echo 'mkdir -p /var/run/apache2' >> /root/run_apache.sh
 RUN echo 'mkdir -p /var/lock/apache2' >> /root/run_apache.sh
