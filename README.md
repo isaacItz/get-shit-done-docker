@@ -2,29 +2,25 @@
 
 Get SH>IT Done Carrousel - Docker App (2021)
 
+## Connect repository to GitPod
+Add the prefix "https://gitpod.io#" to the URL of the repo.
 
-## Install Docker on Amazon Linux 2
-> sudo yum update -y
+Once connected, run commands:
+> sudo apt-get update
 
-> sudo amazon-linux-extras install -y docker
+> sudo apt-get upgrade -y
 
-> sudo service docker start
+> docker version
 
-> sudo usermod -a -G docker ec2-user
+> git version
 
-> sudo systemctl enable docker
-
-> docker info
-
-
-
-## Download the code and Build the container
-> sudo yum install -y git
-
-> git clone https://github.com/Juli-BCN/get-shit-done-docker.git
-
-> cd get-shit-done-docker
-
-> docker build -t get-sh-it-done .
+## Create and run the container
+> docker build -t get-shite .
 
 > docker images
+
+> docker run -d -p44444:80 get-shite
+
+> docker ps
+
+> docker stop CONTAINER_ID
